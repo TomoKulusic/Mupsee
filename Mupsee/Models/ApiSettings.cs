@@ -6,5 +6,7 @@
     public class ApiSettings
     {
         public string YoutubeApi { get; set; }
+        public string ImdbApi { get; set; }
+
     }
 }
