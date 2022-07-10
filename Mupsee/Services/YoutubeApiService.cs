@@ -23,9 +23,9 @@ namespace Mupsee.Services
         }
 
         /// <inheritdoc/>
-        public async Task<List<MovieTrailerResponseItem>> GetYoutubeVideosBySearchCriteriaAsync(string search, int results)
+        public async Task<List<MovieTrailer>> GetYoutubeVideosBySearchCriteriaAsync(string search, int results)
         {
-            var returnList = new List<MovieTrailerResponseItem>();
+            var returnList = new List<MovieTrailer>();
 
             try
             {
@@ -38,7 +38,7 @@ namespace Mupsee.Services
 
                 foreach (var item in response.Items)
                 {
-                    returnList.Add(new MovieTrailerResponseItem
+                    returnList.Add(new MovieTrailer
                     {
                         Title = item.Snippet.Title,
                         TrailerId = item.Id.VideoId

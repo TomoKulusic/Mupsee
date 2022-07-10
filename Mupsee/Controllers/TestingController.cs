@@ -8,12 +8,12 @@ namespace Mupsee.Controllers
 
     [ApiController]
     [Route("[controller]")]
-    public class YoutubeApiController : ControllerBase
+    public class TestingController : ControllerBase
     {
         private readonly IYoutubeApiService _youtubeService;
         private readonly IImdbApiService _imdbApiService;
 
-        public YoutubeApiController(IYoutubeApiService youtubeService, IImdbApiService imdbApiService)
+        public TestingController(IYoutubeApiService youtubeService, IImdbApiService imdbApiService)
         {
             _youtubeService = youtubeService;
             _imdbApiService = imdbApiService;
@@ -26,7 +26,7 @@ namespace Mupsee.Controllers
         /// <param name="results">N of objects that will be returned</param>
         /// <returns></returns>
         [HttpGet("GetYoutubeVideosBySearchCriteriaAsync")]
-        public async Task<List<MovieTrailerResponseItem>> GetYoutubeVideosBySearchCriteriaAsync(string videoName, int results = 1)
+        public async Task<List<MovieTrailer>> GetYoutubeVideosBySearchCriteriaAsync(string videoName, int results = 1)
         {
             return await _youtubeService.GetYoutubeVideosBySearchCriteriaAsync(videoName, results);
         }
@@ -40,7 +40,7 @@ namespace Mupsee.Controllers
         [HttpGet("GetMovieRatingsById")]
         public async Task<MovieRatings> GetMovieRatingsById(string movieImdbId)
         {
-            return await _imdbApiService.GetMovieRatingsById(movieImdbId);
+            return await _imdbApiService.GetMovieRatingsByIdAsync(movieImdbId);
         }
     }
 }

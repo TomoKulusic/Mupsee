@@ -10,6 +10,7 @@ builder.Services.Configure<ApiSettings>(options => builder.Configuration.GetSect
 
 builder.Services.AddScoped<IYoutubeApiService, YoutubeApiService>();
 builder.Services.AddScoped<IImdbApiService, ImdbApiService>();
+builder.Services.AddScoped<IMupseeService, MupseeService>();
 
 
 builder.Services.AddControllers();

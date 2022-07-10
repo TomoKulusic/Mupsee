@@ -13,6 +13,6 @@ namespace Mupsee.Interfaces
         /// <param name="name">Search criteria</param>
         /// <param name="results">Number of objects returned</param>
         /// <returns></returns>
-        Task<List<MovieTrailerResponseItem>> GetYoutubeVideosBySearchCriteriaAsync(string search, int results);
+        Task<List<MovieTrailer>> GetYoutubeVideosBySearchCriteriaAsync(string search, int results);
     }
 }

@@ -13,11 +13,10 @@ namespace Mupsee.Services
         public ImdbApiService(IOptions<ApiSettings> settings)
         {
             ApiSettings = settings.Value;
-
             ApiLib = new ApiLib(ApiSettings.ImdbApi);
-
         }
 
+        /// <inheritdoc/>
         public async Task<List<Movie>> GetMovieDataByNameAsync(string movieName)
         {
             try
@@ -33,7 +32,7 @@ namespace Mupsee.Services
                         Description = item.Description,
                         Id = item.Id,
                         Image = item.Image,
-                        MovieRatings = await GetMovieRatingsById(item.Id),
+                        MovieRatings = await GetMovieRatingsByIdAsync(item.Id),
                     });
                 }
 
@@ -45,7 +44,8 @@ namespace Mupsee.Services
             }
         }
 
-        public async Task<MovieRatings> GetMovieRatingsById(string id)
+        /// <inheritdoc/>
+        public async Task<MovieRatings> GetMovieRatingsByIdAsync(string id)
         {
             try
             {
