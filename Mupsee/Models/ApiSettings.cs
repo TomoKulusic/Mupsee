@@ -6,5 +6,6 @@
     public class ApiSettings
     {
         public string YoutubeApi { get; set; }
+        public string RottenApi { get; set; }
     }
 }

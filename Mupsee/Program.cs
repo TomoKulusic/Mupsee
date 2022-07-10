@@ -9,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.Configure<ApiSettings>(options => builder.Configuration.GetSection("ApiSettings").Bind(options));
 
 builder.Services.AddScoped<IYoutubeApiService, YoutubeApiService>();
+builder.Services.AddScoped<IRottenTomatoesApiService, RottenTomatoesApiService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
