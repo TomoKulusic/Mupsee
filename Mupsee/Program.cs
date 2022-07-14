@@ -4,6 +4,15 @@ using Mupsee.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:3000/").AllowAnyHeader().AllowAnyMethod();
+        });
+});
+
 // Add services to the container.
 
 builder.Services.Configure<ApiSettings>(options => builder.Configuration.GetSection("ApiSettings").Bind(options));
@@ -28,6 +37,13 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors(builder => builder
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .SetIsOriginAllowed((host) => true)
+                .AllowCredentials()
+            );
 
 app.UseAuthorization();
 
