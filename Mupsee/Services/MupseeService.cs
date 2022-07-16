@@ -24,14 +24,7 @@ namespace Mupsee.Services
         {
             try
             {
-                var movies = await _imdbApiService.GetMovieListByFilterAsync(movieName);
-
-                //foreach (var movie in movies)
-                //{
-                //    movie.MovieTrailerResponseItems = await _youtubeApiService.GetYoutubeVideosBySearchCriteriaAsync(movie.Title, 1);
-                //};
-
-                return movies;
+                return await _imdbApiService.GetMovieListByFilterAsync(movieName);
             }
             catch (Exception ex)
             {
@@ -58,7 +51,6 @@ namespace Mupsee.Services
         /// <inheritdoc/>
         public async Task SaveMovieAsFavoriteAsync(FavoriteMovie movie)
         {
-
             try
             {
                 var isMovieAlreadyExist = _context.Favorites.FirstOrDefault(x => x.MovieId == movie.Id);
@@ -81,13 +73,13 @@ namespace Mupsee.Services
                     await _context.SaveChangesAsync();
                 }
             }
-
             catch (Exception ex)
             {
                 throw ex;
             }
         }
 
+        /// <inheritdoc/>
         public async Task<bool> CheckIsFavorite(string movieId)
         {
             try
@@ -98,6 +90,31 @@ namespace Mupsee.Services
                     return false;
 
                 return data.IsFavorite;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        /// <inheritdoc/>
+        public async Task<List<Movie>> GetFavoriteMoviesAsync()
+        {
+            try
+            {
+                var data =  _context.Favorites.Where(x => x.IsFavorite == true);
+                var movieList = new List<Movie>();
+
+                foreach(var movie in data)
+                {
+                    movieList.Add(new Movie
+                    {
+                        Id = movie.MovieId,
+                        Image = movie.Image,
+                    });
+                }
+
+                return movieList;
             }
             catch (Exception ex)
             {
