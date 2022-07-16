@@ -6,6 +6,9 @@
         public string Title { get; set; }
         public string Image { get; set; }
         public string Description { get; set; }
+        public string Runtime { get; set; }
+        public string Release { get; set; }
+        public string Genres { get; set; }
         public MovieRatings MovieRatings { get; set; } = new();
         public List<MovieTrailer> MovieTrailerResponseItems  { get; set;} = new();
     }

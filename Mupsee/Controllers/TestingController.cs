@@ -34,7 +34,7 @@ namespace Mupsee.Controllers
         [HttpGet("GetMovieDataByMovieNameAsync")]
         public async Task<List<Movie>> GetMovieDataByMovieNameAsync(string movieName)
         {
-            return await _imdbApiService.GetMovieDataByNameAsync(movieName);
+            return await _imdbApiService.GetMovieListByFilterAsync(movieName);
         }
 
         [HttpGet("GetMovieRatingsById")]
