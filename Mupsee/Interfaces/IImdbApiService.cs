@@ -9,7 +9,14 @@ namespace Mupsee.Interfaces
         /// </summary>
         /// <param name="movieName"></param>
         /// <returns>List of movie objects</returns>
-        Task<List<Movie>> GetMovieDataByNameAsync(string movieName);
+        Task<List<Movie>> GetMovieListByFilterAsync(string filter);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="movieId"></param>
+        /// <returns></returns>
+        Task<Movie> GetMovieDataByIdAsync(string movieId);
 
         /// <summary>
         /// Returns the ratings of the movie found by imdb ID

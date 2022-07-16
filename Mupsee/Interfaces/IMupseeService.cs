@@ -22,7 +22,9 @@ namespace Mupsee.Interfaces
         /// 
         /// </summary>
         /// <returns></returns>
-        Task SaveMovieAsync();
+        Task SaveMovieAsFavoriteAsync(FavoriteMovie movie);
+
+        Task<bool> CheckIsFavorite(string movieId);
 
     }
 }

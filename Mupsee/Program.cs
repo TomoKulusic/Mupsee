@@ -1,8 +1,17 @@
 using Mupsee.Interfaces;
 using Mupsee.Models;
 using Mupsee.Services;
+using Repository.Context;
+using Microsoft.EntityFrameworkCore;
+
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<MupseeContext>(options =>
+{
+    var connectionString = builder.Configuration.GetConnectionString("MupseeConnectionString");
+    options.UseSqlServer(connectionString);
+});
 
 builder.Services.AddCors(options =>
 {
