@@ -28,8 +28,10 @@ builder.Services.Configure<ApiSettings>(options => builder.Configuration.GetSect
 
 builder.Services.AddScoped<IYoutubeApiService, YoutubeApiService>();
 builder.Services.AddScoped<IImdbApiService, ImdbApiService>();
-builder.Services.AddScoped<IMupseeService, MupseeService>();
+builder.Services.AddScoped<IMupseeService, MupseeService>(); 
+builder.Services.AddScoped(typeof(ICachingService<>), typeof(CachingService<>));
 
+builder.Services.AddMemoryCache();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

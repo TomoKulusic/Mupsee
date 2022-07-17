@@ -1,4 +1,5 @@
 ﻿using Mupsee.Models;
+using Repository.Entities;
 
 namespace Mupsee.Interfaces
 {
@@ -13,6 +14,13 @@ namespace Mupsee.Interfaces
         /// <param name="name">Search criteria</param>
         /// <param name="results">Number of objects returned</param>
         /// <returns></returns>
-        Task<List<MovieTrailer>> GetYoutubeVideosBySearchCriteriaAsync(string search, int results);
+        Task<string> GetYoutubeVideosBySearchCriteriaAsync(string search, int results, string movieId);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        Task SaveYoutubeVideosAsync(MovieTrailers data);
     }
 }

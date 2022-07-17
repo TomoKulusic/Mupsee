@@ -38,7 +38,7 @@ namespace Mupsee.Services
             try
             {
                 var movie = await _imdbApiService.GetMovieDataByIdAsync(movieId);
-                //movie.MovieTrailerResponseItems = await _youtubeApiService.GetYoutubeVideosBySearchCriteriaAsync(movie.Title, 1);
+                movie.Trailers = await _youtubeApiService.GetYoutubeVideosBySearchCriteriaAsync(movie.Title, 20, movieId);
 
                 return movie;
             }

@@ -25,11 +25,11 @@ namespace Mupsee.Controllers
         /// <param name="videoName">Search criteria</param>
         /// <param name="results">N of objects that will be returned</param>
         /// <returns></returns>
-        [HttpGet("GetYoutubeVideosBySearchCriteriaAsync")]
-        public async Task<List<MovieTrailer>> GetYoutubeVideosBySearchCriteriaAsync(string videoName, int results = 1)
-        {
-            return await _youtubeService.GetYoutubeVideosBySearchCriteriaAsync(videoName, results);
-        }
+        //[HttpGet("GetYoutubeVideosBySearchCriteriaAsync")]
+        //public async Task<List<MovieTrailer>> GetYoutubeVideosBySearchCriteriaAsync(string videoName, int results = 1)
+        //{
+        //    return await _youtubeService.GetYoutubeVideosBySearchCriteriaAsync(videoName, results);
+        //}
 
         [HttpGet("GetMovieDataByMovieNameAsync")]
         public async Task<List<Movie>> GetMovieDataByMovieNameAsync(string movieName)
