@@ -38,7 +38,7 @@ namespace Mupsee.Services
                 var data = await ApiLib.AdvancedSearchAsync(searchInput);
 
 
-                foreach (var item in data.Results.Take(25))
+                foreach (var item in data.Results)
                 {
                     response.Add(new Movie
                     {

@@ -12,6 +12,7 @@ namespace Repository.Context
 
 
         public DbSet<Favorite> Favorites { get; set; }
+        public DbSet<MovieTrailers> MovieTrailers { get; set; }
 
         public async override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {

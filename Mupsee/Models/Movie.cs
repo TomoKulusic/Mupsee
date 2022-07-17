@@ -10,6 +10,6 @@
         public string Release { get; set; }
         public string Genres { get; set; }
         public MovieRatings MovieRatings { get; set; } = new();
-        public List<MovieTrailer> MovieTrailerResponseItems  { get; set;} = new();
+        public string Trailers  { get; set;}
     }
 }
