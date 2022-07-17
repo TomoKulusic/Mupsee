@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Mupsee.Interfaces;
 using Mupsee.Models;
 
@@ -20,6 +21,8 @@ namespace Mupsee.Controllers
         /// </summary>
         /// <param name="search"></param>
         /// <returns>List of movie objects</returns>
+        [Authorize]
+
         [HttpGet("SearchAsync")]
         public async Task<List<Movie>> SearchAsync(string? search)
         {
@@ -31,6 +34,8 @@ namespace Mupsee.Controllers
         /// </summary>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
+        [Authorize]
+
         [HttpGet("SearchByIdAsync")]
         public async Task<Movie> SearchByIdAsync(string movieId)
         {
@@ -45,6 +50,8 @@ namespace Mupsee.Controllers
         /// </summary>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
+        [Authorize]
+
         [HttpPost("SaveMovieAsFavorite")]
         public async Task SaveMovieAsFavorite([FromBody] FavoriteMovie movie)
         {
@@ -59,6 +66,8 @@ namespace Mupsee.Controllers
         /// </summary>
         /// <param name="movieId"></param>
         /// <returns></returns>
+        [Authorize]
+
         [HttpGet("CheckIsFavorite")]
         public async Task<bool> CheckIsFavorite(string movieId)
         {
@@ -72,6 +81,8 @@ namespace Mupsee.Controllers
         /// 
         /// </summary>
         /// <returns></returns>
+        [Authorize]
+
         [HttpGet("GetFavoriteMovies")]
         public async Task<List<Movie>> GetFavoriteMoviesAsync()
         {
