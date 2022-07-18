@@ -28,10 +28,13 @@ builder.Services.AddCors(options =>
 // Add services to the container.
 
 builder.Services.Configure<ApiSettings>(options => builder.Configuration.GetSection("ApiSettings").Bind(options));
+builder.Services.Configure<EmailConfiguration>(options => builder.Configuration.GetSection("EmailConfiguration").Bind(options));
+
 
 builder.Services.AddScoped<IYoutubeApiService, YoutubeApiService>();
 builder.Services.AddScoped<IImdbApiService, ImdbApiService>();
-builder.Services.AddScoped<IMupseeService, MupseeService>(); 
+builder.Services.AddScoped<IMupseeService, MupseeService>();
+builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped(typeof(ICachingService<>), typeof(CachingService<>));
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {
