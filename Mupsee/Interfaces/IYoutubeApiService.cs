@@ -4,7 +4,7 @@ using Repository.Entities;
 namespace Mupsee.Interfaces
 {
     /// <summary>
-    /// Youtube api service interface - container needed methods
+    /// Youtube api service interface
     /// </summary>
     public interface IYoutubeApiService
     {
@@ -15,12 +15,5 @@ namespace Mupsee.Interfaces
         /// <param name="results">Number of objects returned</param>
         /// <returns></returns>
         Task<string> GetYoutubeVideosBySearchCriteriaAsync(string search, int results, string movieId);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="data"></param>
-        /// <returns></returns>
-        Task SaveYoutubeVideosAsync(MovieTrailers data);
     }
 }

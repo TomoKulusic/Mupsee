@@ -5,25 +5,28 @@ namespace Mupsee.Services
 {
     public class CachingService<T> : ICachingService<T> where T : class
     {
-        private IMemoryCache _cache;
+        private IMemoryCache _memoryCache;
 
-        public CachingService(IMemoryCache cache)
+        public CachingService(IMemoryCache memoryCache)
         {
-            _cache = cache;
+            _memoryCache = memoryCache;
         }
+
+        /// <inheritdoc/>
 
         public T CheckIfDataIsCached(string name)
         {
-            return _cache.Get<T>(name);
+            return _memoryCache.Get<T>(name);
         }
 
+        /// <inheritdoc/>
         public void CacheData(string name, T data)
         {
-            var output = _cache.Get<List<T>>(name);
+            var output = _memoryCache.Get<List<T>>(name);
 
             if (output is null)
             {
-                _cache.Set(name, data, TimeSpan.FromDays(1));
+                _memoryCache.Set(name, data, TimeSpan.FromDays(1));
             }
         }
     }

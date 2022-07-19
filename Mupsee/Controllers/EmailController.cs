@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Mupsee.Interfaces;
+using Mupsee.Models;
 
 namespace Mupsee.Controllers
 {
@@ -14,10 +15,14 @@ namespace Mupsee.Controllers
             _emailService = emailService;
         }
 
+        /// <summary>
+        /// Action for sending an email
+        /// </summary>
+        /// <param name="body"></param>
         [HttpPost]
-        public void SendEmail(string subject, string body)
+        public void SendEmail([FromBody] EmailViewModel emailViewModel)
         { 
-            _emailService.SendEmail(subject, body);
+            _emailService.SendEmail(emailViewModel);
         }
     }
 }

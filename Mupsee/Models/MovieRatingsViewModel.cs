@@ -1,6 +1,6 @@
 ﻿namespace Mupsee.Models
 {
-    public class MovieRatings
+    public class MovieRatingsViewModel
     {
         public string ImdbRating { get; set; }
         public string RottenTomatoesRating { get; set; }

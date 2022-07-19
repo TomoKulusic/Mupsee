@@ -1,4 +1,4 @@
-﻿namespace Mupsee.Models
+﻿namespace Mupsee.Models.SettingsModels
 {
     public class EmailConfiguration
     {
