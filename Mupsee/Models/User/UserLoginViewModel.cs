@@ -1,6 +1,6 @@
 ﻿namespace Mupsee.Models.User
 {
-    public class UserLogin
+    public class UserLoginViewModel
     {
         public string Username { get; set; }
         public string Password { get; set; }

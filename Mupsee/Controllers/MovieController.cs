@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations;
 namespace Mupsee.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class MovieController : ControllerBase
     {
         private readonly IMovieService _movieService;
