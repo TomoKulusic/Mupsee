@@ -21,6 +21,8 @@ builder.Services.AddCors(options =>
     options.AddDefaultPolicy(
         policy =>
         {
+            /// For testing purposes here we enabled pretty much everything for this address.
+            /// For production we would have to add real url addresses
             policy.WithOrigins("http://localhost:3000/").AllowAnyHeader().AllowAnyMethod();
         });
 });
@@ -36,6 +38,8 @@ builder.Services.AddScoped<IImdbApiService, ImdbApiService>();
 builder.Services.AddScoped<IMovieService, MovieService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IFavoriteService, FavoriteService>();
+builder.Services.AddScoped<ILoginService, LoginService>();
+
 builder.Services.AddSingleton(typeof(ICachingService<>), typeof(CachingService<>));
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {

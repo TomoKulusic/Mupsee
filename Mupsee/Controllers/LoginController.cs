@@ -1,16 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
+using Mupsee.Interfaces;
 using Mupsee.Models.User;
-using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Mupsee.Controllers
 {
@@ -19,75 +10,29 @@ namespace Mupsee.Controllers
     [ApiController]
     public class LoginController : ControllerBase
     {
-        private IConfiguration _config;
+        private ILoginService _loginService;
 
-        public LoginController(IConfiguration config)
+        public LoginController(ILoginService loginService)
         {
-            _config = config;
+            _loginService = loginService;
         }
 
         [AllowAnonymous]
-        [HttpPost]
-        public async Task<TokenClass> Login([FromBody] UserLogin userLogin)
+        [HttpPost("Login")]
+        public string Login([FromBody] UserLoginViewModel userLoginVm)
         {
-            var user = Authenticate(userLogin);
+            var userVm = _loginService.Authenticate(userLoginVm);
 
-            if (user != null)
+            if (userVm != null)
             {
-                var token = Generate(user);
-                return new TokenClass()
-                {
-                    Token = token
-                };
-            }
-
-            return null;
-            //return NotFound("User not found");
-        }
-
-        private string Generate(UserModel user)
-        {
-            var sdas = _config["Jwt:Key"];
-
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
-            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-
-            var claims = new[]
-            {
-                new Claim(ClaimTypes.NameIdentifier, user.Username),
-                new Claim(ClaimTypes.Email, user.EmailAddress),
-                new Claim(ClaimTypes.GivenName, user.GivenName),
-                new Claim(ClaimTypes.Surname, user.Surname),
-                new Claim(ClaimTypes.Role, user.Role)
-            };
-
-            var a = _config["Jwt:Audience"];
-            var b = _config["Jwt:Issuer"];
-
-            var token = new JwtSecurityToken(_config["Jwt:Issuer"],
-              _config["Jwt:Audience"],
-              claims,
-              expires: DateTime.Now.AddMinutes(15),
-              signingCredentials: credentials);
-
-            return new JwtSecurityTokenHandler().WriteToken(token);
-        }
-
-        private UserModel Authenticate(UserLogin userLogin)
-        {
-            var currentUser = UserConstants.Users.FirstOrDefault(o => o.Username.ToLower() == userLogin.Username.ToLower() && o.Password == userLogin.Password);
-
-            if (currentUser != null)
-            {
-                return currentUser;
+                var token = _loginService.GenerateToken(userVm);
+                return token;
             }
 
             return null;
         }
-    }
 
-    public class TokenClass { 
-        public string Token { get; set; }
+
     }
 }
 
