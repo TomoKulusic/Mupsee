@@ -3,25 +3,26 @@ using IMDbApiLib.Models;
 using Microsoft.Extensions.Options;
 using Mupsee.Interfaces;
 using Mupsee.Models;
+using Mupsee.Models.SettingsModels;
 
 namespace Mupsee.Services
 {
     public class ImdbApiService : IImdbApiService
     {
-        protected ApiLib ApiLib;
-        public ApiSettings ApiSettings { get; set; }
-        public ImdbApiService(IOptions<ApiSettings> settings)
+        private ApiLib ApiLib;
+        private ApiConfiguration _apiConfiguration { get; set; }
+        public ImdbApiService(IOptions<ApiConfiguration> apiConfiguration)
         {
-            ApiSettings = settings.Value;
-            ApiLib = new ApiLib(ApiSettings.ImdbApi);
+            _apiConfiguration = apiConfiguration.Value;
+            ApiLib = new ApiLib(_apiConfiguration.ImdbApi);
         }
 
         /// <inheritdoc/>
-        public async Task<List<Movie>> GetMovieListByFilterAsync(string filter)
+        public async Task<List<MovieViewModel>> GetMovieListByFilterAsync(string filter)
         {
             try
             {
-                var response = new List<Movie>();
+                var moviesVm = new List<MovieViewModel>();
                 var searchInput = new AdvancedSearchInput() { TitleType = AdvancedSearchTitleType.Feature_Film, Count=AdvancedSearchCount.Fifty };
 
                 if (string.IsNullOrWhiteSpace(filter))
@@ -31,23 +32,21 @@ namespace Mupsee.Services
                 }
                 else {
                     searchInput.Title = filter;
-
                 }
 
                 //var data = await ApiLib.AdvancedSearchAsync(new AdvancedSearchInput {Title=filter, TitleType=AdvancedSearchTitleType.Feature_Film });\
-                var data = await ApiLib.AdvancedSearchAsync(searchInput);
+                var response = await ApiLib.AdvancedSearchAsync(searchInput);
 
-
-                foreach (var item in data.Results)
+                foreach (var movie in response.Results)
                 {
-                    response.Add(new Movie
+                    moviesVm.Add(new MovieViewModel
                     {
-                        Id = item.Id,
-                        Image = item.Image,
+                        Id = movie.Id,
+                        Image = movie.Image,
                     });
                 }
 
-                return response;
+                return moviesVm;
             }
             catch (Exception ex)
             {
@@ -56,19 +55,19 @@ namespace Mupsee.Services
         }
 
         /// <inheritdoc/>
-        public async Task<MovieRatings> GetMovieRatingsByIdAsync(string id)
+        public async Task<MovieRatingsViewModel> GetMovieRatingsByIdAsync(string id)
         {
             try
             {
-                var data = await ApiLib.RatingsAsync(id);
+                var response = await ApiLib.RatingsAsync(id);
 
-                var response = new MovieRatings
+                var movieRatingsVm = new MovieRatingsViewModel
                 {
-                    ImdbRating = data.IMDb,
-                    RottenTomatoesRating = data.RottenTomatoes
+                    ImdbRating = response.IMDb,
+                    RottenTomatoesRating = response.RottenTomatoes
                 };
 
-                return response;
+                return movieRatingsVm;
             }
             catch (Exception ex)
             {
@@ -77,24 +76,24 @@ namespace Mupsee.Services
         }
 
         /// <inheritdoc/>
-        public async Task<Movie> GetMovieDataByIdAsync(string movieId)
+        public async Task<MovieViewModel> GetMovieDataByIdAsync(string movieId)
         {
             try
             {
-                var data = await ApiLib.TitleAsync(movieId);
-                var movie = new Movie()
+                var response = await ApiLib.TitleAsync(movieId);
+                var movieVm = new MovieViewModel()
                 {
-                    Title = data.Title,
-                    Genres = data.Genres,
-                    Runtime = data.RuntimeStr,
-                    Description = data.Plot,
-                    Release = data.ReleaseDate,
-                    Id = data.Id,
-                    Image = data.Image,
-                    MovieRatings = await GetMovieRatingsByIdAsync(movieId),
+                    Title = response.Title,
+                    Genres = response.Genres,
+                    Runtime = response.RuntimeStr,
+                    Description = response.Plot,
+                    Release = response.ReleaseDate,
+                    Id = response.Id,
+                    Image = response.Image,
+                    MovieRatingsVm = await GetMovieRatingsByIdAsync(movieId),
                 };
 
-                return movie;
+                return movieVm;
             }
             catch (Exception ex) {
                 throw ex;

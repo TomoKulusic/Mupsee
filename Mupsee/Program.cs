@@ -1,5 +1,4 @@
 using Mupsee.Interfaces;
-using Mupsee.Models;
 using Mupsee.Services;
 using Repository.Context;
 using Microsoft.EntityFrameworkCore;
@@ -7,6 +6,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.OpenApi.Models;
+using Mupsee.Models.SettingsModels;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,15 +27,16 @@ builder.Services.AddCors(options =>
 
 // Add services to the container.
 
-builder.Services.Configure<ApiSettings>(options => builder.Configuration.GetSection("ApiSettings").Bind(options));
+builder.Services.Configure<ApiConfiguration>(options => builder.Configuration.GetSection("ApiSettings").Bind(options));
 builder.Services.Configure<EmailConfiguration>(options => builder.Configuration.GetSection("EmailConfiguration").Bind(options));
 
 
 builder.Services.AddScoped<IYoutubeApiService, YoutubeApiService>();
 builder.Services.AddScoped<IImdbApiService, ImdbApiService>();
-builder.Services.AddScoped<IMupseeService, MupseeService>();
+builder.Services.AddScoped<IMovieService, MovieService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
-builder.Services.AddScoped(typeof(ICachingService<>), typeof(CachingService<>));
+builder.Services.AddScoped<IFavoriteService, FavoriteService>();
+builder.Services.AddSingleton(typeof(ICachingService<>), typeof(CachingService<>));
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {
     options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters

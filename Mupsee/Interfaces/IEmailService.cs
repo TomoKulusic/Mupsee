@@ -1,7 +1,16 @@
-﻿namespace Mupsee.Interfaces
+﻿using Mupsee.Models;
+
+namespace Mupsee.Interfaces
 {
+    /// <summary>
+    /// IEmailService
+    /// </summary>
     public interface IEmailService
     {
-        public void SendEmail(string subject, string body);
+        /// <summary>
+        /// Method for sending an email
+        /// </summary>
+        /// <param name="email"></param>
+        public void SendEmail(EmailViewModel emailViewModel);
     }
 }
