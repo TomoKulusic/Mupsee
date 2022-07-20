@@ -20,8 +20,9 @@ Currently, only youtube videos are cached, but in the future, I might consider c
 
 When you pull the repository in the API you need to set up your database connection strings, email recipient, and password, for dummy mails I have used https://ethereal.email/ it is a simple 2-click mail generator, and you just put email and password in appsettings file
 
-For the client page, you can just run it using npm start.
-If needed you can run npm i --legacy-peer-deps 
+Client page
+- npm i --legacy-peer-deps 
+- npm start
 
 You can log in to the app using this data {username: Dummy, password: Dummy_user} there is no user database, therefore in this version, there is no registration process you can simply log in using this dummy data.
 
