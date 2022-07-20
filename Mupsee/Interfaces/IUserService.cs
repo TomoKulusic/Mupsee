@@ -5,7 +5,7 @@ namespace Mupsee.Interfaces
     /// <summary>
     /// ILoginService
     /// </summary>
-    public interface ILoginService
+    public interface IUserService
     {
         /// <summary>
         /// Method for generating token

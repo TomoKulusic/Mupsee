@@ -9,7 +9,7 @@ namespace Mupsee.Interfaces
         /// </summary>
         /// <param name="movieName"></param>
         /// <returns>List of movie objects</returns>
-        Task<List<MovieViewModel>> GetMovieListByFilterAsync(string filter);
+        Task<List<MovieViewModel>> GetMovieListByFilterAsync(FilterModel filter);
 
         /// <summary>
         /// 

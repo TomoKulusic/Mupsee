@@ -18,23 +18,30 @@ namespace Mupsee.Services
         }
 
         /// <inheritdoc/>
-        public async Task<List<MovieViewModel>> GetMovieListByFilterAsync(string filter)
+        public async Task<List<MovieViewModel>> GetMovieListByFilterAsync(FilterModel filter)
         {
             try
             {
                 var moviesVm = new List<MovieViewModel>();
-                var searchInput = new AdvancedSearchInput() { TitleType = AdvancedSearchTitleType.Feature_Film, Count=AdvancedSearchCount.Fifty };
 
-                if (string.IsNullOrWhiteSpace(filter))
+                var searchInput = new AdvancedSearchInput() { TitleType = AdvancedSearchTitleType.Feature_Film, Count=AdvancedSearchCount.Fifty };     
+
+                if (filter is null)
                 {
-                    searchInput.ReleaseDateFrom = "2022-07-01";
                     searchInput.Sort = AdvancedSearchSort.Release_Date_Descending;
                 }
-                else {
-                    searchInput.Title = filter;
-                }
 
-                //var data = await ApiLib.AdvancedSearchAsync(new AdvancedSearchInput {Title=filter, TitleType=AdvancedSearchTitleType.Feature_Film });\
+                searchInput.Title = !string.IsNullOrWhiteSpace(filter.Title) ? filter.Title : "";
+
+                if(!string.IsNullOrWhiteSpace(filter.Genre))
+                    searchInput.Genres = (AdvancedSearchGenre)Enum.Parse(typeof(AdvancedSearchGenre), filter.Genre);
+
+                if (!string.IsNullOrWhiteSpace(filter.Language))
+                    searchInput.Languages = (AdvancedSearchLanguage)Enum.Parse(typeof(AdvancedSearchLanguage), filter.Language);
+
+                if (filter.Rating > 0)
+                    searchInput.UserRatingFrom = filter.Rating;
+
                 var response = await ApiLib.AdvancedSearchAsync(searchInput);
 
                 foreach (var movie in response.Results)

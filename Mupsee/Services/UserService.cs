@@ -7,11 +7,11 @@ using System.Text;
 
 namespace Mupsee.Services
 {
-    public class LoginService : ILoginService
+    public class UserService : IUserService
     {
         private IConfiguration _config;
 
-        public LoginService(IConfiguration config)
+        public UserService(IConfiguration config)
         {
             _config = config;
         }
@@ -30,7 +30,7 @@ namespace Mupsee.Services
             var token = new JwtSecurityToken(_config["Jwt:Issuer"],
               _config["Jwt:Audience"],
               claims,
-              expires: DateTime.Now.AddMinutes(15),
+              expires: DateTime.Now.AddDays(1),
               signingCredentials: credentials);
 
             return new JwtSecurityTokenHandler().WriteToken(token);

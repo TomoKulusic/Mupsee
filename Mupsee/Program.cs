@@ -38,7 +38,7 @@ builder.Services.AddScoped<IImdbApiService, ImdbApiService>();
 builder.Services.AddScoped<IMovieService, MovieService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IFavoriteService, FavoriteService>();
-builder.Services.AddScoped<ILoginService, LoginService>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 builder.Services.AddSingleton(typeof(ICachingService<>), typeof(CachingService<>));
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>

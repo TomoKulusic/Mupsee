@@ -9,7 +9,7 @@ namespace Mupsee.Interfaces
         /// </summary>
         /// <param name="movieName"></param>
         /// <returns>List of movies</returns>
-        Task<List<MovieViewModel>> SearchMoviesAsync(string movieName);
+        Task<List<MovieViewModel>> SearchMoviesAsync(FilterModel filter);
 
         /// <summary>
         /// Will search for a movie by provided id

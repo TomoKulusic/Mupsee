@@ -42,9 +42,10 @@ namespace Mupsee.Services
                     var videos = "";
 
                     var searchRequest = YouTubeService.Search.List("snippet");
-                    searchRequest.Q = search;
+                    searchRequest.Q = $"{search} trailer";
                     searchRequest.MaxResults = results;
                     searchRequest.Type = "video";
+                    searchRequest.TopicId = "/m/02vxn";
 
                     var response = await searchRequest.ExecuteAsync();
                     videos = string.Join(",", response.Items.Select(x => x.Id.VideoId));

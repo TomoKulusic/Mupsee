@@ -1,7 +1,9 @@
-﻿using Mupsee.Interfaces;
+﻿using Microsoft.AspNetCore.Mvc;
+using Mupsee.Interfaces;
 using Mupsee.Models;
 using Repository.Context;
 using Repository.Entities;
+using System.Web.Http;
 
 namespace Mupsee.Services
 {
@@ -17,11 +19,11 @@ namespace Mupsee.Services
         }
 
         /// <inheritdoc/>
-        public async Task<List<MovieViewModel>> SearchMoviesAsync(string movieName)
+        public async Task<List<MovieViewModel>> SearchMoviesAsync([FromQuery]FilterModel filter)
         {
             try
             {
-                return await _imdbApiService.GetMovieListByFilterAsync(movieName);
+                return await _imdbApiService.GetMovieListByFilterAsync(filter);
             }
             catch (Exception ex)
             {

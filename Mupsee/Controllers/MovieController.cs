@@ -23,11 +23,10 @@ namespace Mupsee.Controllers
         /// <param name="search"></param>
         /// <returns>List of movie objects</returns>
         [Authorize]
-
-        [HttpGet("SearchAsync")]
-        public async Task<List<MovieViewModel>> SearchAsync(string? search)
+        [HttpGet("SearchMoviesAsync")]
+        public async Task<List<MovieViewModel>> SearchMoviesAsync([FromQuery]FilterModel filter)
         {
-            return await _movieService.SearchMoviesAsync(search);
+            return await _movieService.SearchMoviesAsync(filter);
         }
 
         /// <summary>
