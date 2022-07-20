@@ -7,7 +7,7 @@ Idea for project design (this was the starting point, but it changed during the 
 ![Movies Proxy Search Engine - Mupsee](https://user-images.githubusercontent.com/17182815/179998073-fb01e8cd-06f0-44ff-8c1d-46845d9ffb07.png)
 
 
-# Ides on the way
+# Ideas on the way
 For filtering the movies the idea was to use some sort of elastic search, but since we don't have a dedicated movie database and we get data directly from the IMBD API that idea seemed a bit too complicated to implement at first. So I have decided to go with the easier way and build a simple filter for searching.
 
 Youtube API/IMBD  API are in the mupsee project for purposes of this project, but if we decided to scale it and push it to production we could consider separating those two APIs into separate projects and deploying them as microservices.
@@ -16,7 +16,7 @@ In the future maybe considering to build ML lib for searching similar movies by 
 
 Currently, only youtube videos are cached, but in the future, I might consider caching movies just to improve performance.
 
-# How to run a project.
+# How to run.
 
 When you pull the repository in the API you need to set up your database connection strings, email recipient, and password, for dummy mails I have used https://ethereal.email/ it is a simple 2-click mail generator, and you just put email and password in appsettings file
 
