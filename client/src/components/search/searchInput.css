@@ -1,0 +1,23 @@
+.search-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.search-container input {
+  height: 50px;
+  width: 300px;
+  width: 100%;
+  border: none;
+  background-color: lightgray;
+}
+
+input[type="text"] {
+  padding-left: 35px;
+  font-size: 20px;
+}
+
+::placeholder {
+  /* padding-left: 35px; */
+  font-size: 20px;
+}

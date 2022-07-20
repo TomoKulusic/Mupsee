@@ -1,0 +1,101 @@
+.movie-section {
+  position: relative;
+  padding: 4px;
+  height: 450px;
+  width: 300px;
+  position: relative;
+}
+
+.movie-section > img {
+  height: 100%;
+  width: 100%;
+  opacity: 1;
+  display: block;
+  transition: 0.5s ease;
+  backface-visibility: hidden;
+}
+
+.dataResult {
+  /* background-color: white;
+    overflow: hidden;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 100px 70px 0 70px;
+    flex-wrap: wrap; */
+  place-content: center flex-start;
+  display: flex;
+  -webkit-box-pack: start;
+  flex-flow: row wrap;
+  margin: 0px 0px 0px -20px;
+}
+
+.movie-container {
+  /* position: relative;
+    padding: 4px;
+    height: 450px;
+    width: 300px; */
+  margin: 20px 0px 0px 20px;
+  flex: 0 0 auto;
+  width: calc(20% - 20px);
+}
+
+.movie-container > div {
+  /* margin: 20px 0px 0px 20px;
+    flex: 0 0 auto; */
+}
+
+.movie-container > a {
+  backface-visibility: hidden;
+  border-radius: 4px;
+  box-shadow: rgb(0 0 0 / 69%) 0px 26px 30px -10px,
+    rgb(0 0 0 / 73%) 0px 16px 10px -10px;
+  cursor: pointer;
+  display: block;
+  position: relative;
+  transform: scale(1, 1) translateZ(0px);
+  transition-duration: 300ms;
+  transition-property: transform, box-shadow;
+  transition-timing-function: ease-out;
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+
+.movie-container > a:hover {
+  box-shadow: rgb(0 0 0 / 80%) 0px 40px 58px -16px,
+    rgb(0 0 0 / 72%) 0px 30px 22px -10px;
+  transform: scale(1.05, 1.05) translateZ(0px) translate3d(0px, 0px, 0px);
+  transition-duration: 300ms;
+  transition-property: transform, box-shadow;
+  transition-timing-function: ease-out;
+}
+
+.movie-container > a > div {
+  background: linear-gradient(rgb(48, 50, 62), rgb(30, 31, 42));
+  border-radius: 4px;
+  padding-top: 56.25%;
+  height: 0px;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.image-container {
+  inset: 0px;
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  opacity: 1;
+  position: absolute;
+  transition: opacity 500ms ease-in-out 0s;
+  width: 100%;
+}
+
+.image-container:hover {
+  opacity: 0;
+}
+
+.favorites-title {
+  font-size: 24px;
+  font-weight: bold;
+}
