@@ -16,7 +16,7 @@ In the future maybe considering to build ML lib for searching similar movies by 
 
 Currently, only youtube videos are cached, but in the future, I might consider caching movies just to improve performance.
 
-# How to run.
+# How to run
 
 When you pull the repository in the API you need to set up your database connection strings, email recipient, and password, for dummy mails I have used https://ethereal.email/ it is a simple 2-click mail generator, and you just put email and password in appsettings file
 
